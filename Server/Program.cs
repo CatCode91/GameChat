@@ -35,8 +35,9 @@ namespace Server
                 Console.WriteLine("8.   \t Выход");
                 Console.WriteLine("*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
                 Console.WriteLine();
-
-                Console.WriteLine("------------------------LOG-----------------------");
+                
+                Console.WriteLine("------------------------LOG----------------------");
+                Console.WriteLine("           ***(ENTER для обновления)***" + Environment.NewLine);
                 LogManager.ShowAllRecords(LogFormat.Short);
                 Console.WriteLine("--------------------------------------------------");
 
@@ -48,7 +49,7 @@ namespace Server
                 
                 catch 
                 {
-                    Console.WriteLine("Некорректный ввод!");
+                    continue;
                 }
                     
 

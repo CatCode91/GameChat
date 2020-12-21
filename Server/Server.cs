@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,13 +11,16 @@ namespace Server
     public class Server
     {
         //хранит в себе список подключенных клиентов
-        private List<ClientModel> _clients = new List<ClientModel>();
+        private List<Client> _clients = new List<Client>();
 
         //таймер, каждых пару сек проверяет, не ушел ли какой клиент с сервера.
         private Timer _timer;
 
         //основной слушающий сокет сервера
         private Socket _socket;
+
+        //основной слушающий сокет сервера
+        private Socket _socketRecieve;
 
         //токен для отмены таски слушания
         private CancellationTokenSource _cts;
@@ -93,7 +97,7 @@ namespace Server
             }
         }
 
-        //метод таски, запускающейся из метода Run
+        //таска, запускающаяся из метода Run
         private void StartListen(string ipAdress, int port,CancellationToken cts)
         {
                 IPEndPoint ipEndPoint = new IPEndPoint(IPAddress.Parse(ipAdress), port);
@@ -115,11 +119,11 @@ namespace Server
                     return;
                 }
 
-                ClientModel newClient;
+                Client newClient;
 
                 try
                 {
-                    newClient = new ClientModel(_socket.Accept());
+                    newClient = new Client(_socket.Accept());
                     ServerEventHappend($"Пользователь {newClient.Name} подключился к серверу!", MessageStatus.OK);
                     //когда достучался клиент, подписываемся на его события
                     //1 .Прием сообщений от клиента
@@ -134,21 +138,23 @@ namespace Server
             }
         }  
 
-        private void ClientMessageRecived(ClientModel client,string message)
+        //подписка на событие, когда приходит новое сообщение чтоб разослать остальным
+        private void ClientMessageRecived(Client client,Message message)
         {
-            ServerEventHappend($"Новое сообщение от {client.Name}", MessageStatus.OK);
-            ServerEventHappend(message,MessageStatus.OK);
+            ServerEventHappend($"Новое сообщение от {client.Name} размером {message.Size} байт.", MessageStatus.OK);
 
-            //рассылаем сообщение другим челам 
-            foreach (ClientModel cl in _clients)
+            //рассылаем сообщение другим челам
+            foreach (Client cl in _clients.ToArray()) //приводим к массиву, если вдруг коллецкия будет изменена из другого потока, чтоб не было проблем :)
+               
                 if (client.Name != cl.Name)
                 {
+                    message.Login = cl.Name;
                     client.SendMessage(message);
                     return;
                 }
         }
 
-        private void ClientDisconnected(ClientModel client)
+        private void ClientDisconnected(Client client)
         {
             _clients.Remove(client);
             ServerEventHappend($"Пользователь {client.Name} отключился от сервера",MessageStatus.OK);
@@ -160,5 +166,6 @@ namespace Server
             LogManager.AddLog(text, MessageStatus.OK);
             UsefulMessages?.Invoke(text);
         }
+
     }
 }

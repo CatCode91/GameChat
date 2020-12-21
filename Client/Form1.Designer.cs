@@ -54,7 +54,6 @@ namespace Client
             this.button1.TabIndex = 1;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // btn_connect
             // 
@@ -84,6 +83,7 @@ namespace Client
             this.btn_send.TabIndex = 1;
             this.btn_send.Text = "Послать";
             this.btn_send.UseVisualStyleBackColor = true;
+            this.btn_send.Click += new System.EventHandler(this.btn_send_Click);
             // 
             // Form1
             // 
@@ -101,11 +101,6 @@ namespace Client
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-          
         }
 
         #endregion

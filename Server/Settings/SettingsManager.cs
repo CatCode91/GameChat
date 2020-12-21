@@ -29,7 +29,17 @@ namespace Server
                 Console.WriteLine($"3.   \t Выйти из настроек");
                 Console.WriteLine("-------------------------------------------------" + Environment.NewLine);
 
-                int command = Convert.ToInt32(Console.ReadLine());
+                int command;
+                try
+                {
+                    command = Convert.ToInt32(Console.ReadLine());
+                }
+
+                catch 
+                {
+                    command = 3;
+                }
+
 
                 switch (command)
                 {
