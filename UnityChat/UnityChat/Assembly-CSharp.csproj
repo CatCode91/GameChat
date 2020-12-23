@@ -63,11 +63,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\ButtonConnect.cs" />
+    <Compile Include="Assets\MessageItem.cs" />
     <Compile Include="Assets\Scripts\CameraHandler.cs" />
     <Compile Include="Assets\Scripts\ClickLogo.cs" />
-    <Compile Include="Assets\Scripts\IpText.cs" />
+    <Compile Include="Assets\Scripts\Client.cs" />
+    <Compile Include="Assets\Scripts\MenuAnimator.cs" />
     <Compile Include="Assets\Scripts\Models\ErrorMessage.cs" />
+    <Compile Include="Assets\Scripts\Models\MessageChat.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
@@ -325,6 +327,9 @@
     </Reference>
     <Reference Include="UnityEngine.XRModule">
       <HintPath>D:/OTHERS/unity/2019.3.11f1/Editor/Data/Managed/UnityEngine/UnityEngine.XRModule.dll</HintPath>
+    </Reference>
+    <Reference Include="ClientLibrary">
+      <HintPath>D:/DEVELOP/GIT/GameChat/UnityChat/UnityChat/Assets/Plugins/ClientLibrary.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>D:/OTHERS/unity/2019.3.11f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

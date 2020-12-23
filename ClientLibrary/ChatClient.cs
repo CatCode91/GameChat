@@ -20,7 +20,6 @@ namespace ClientLibrary
         private CancellationTokenSource _cts;
 
         public event Action<IMessage> NewMessage;
-        public event Action<string> ServerEvents;
 
         public void SendMessage(string text)
         {
@@ -85,7 +84,7 @@ namespace ClientLibrary
                 //запоминаем сколько весит сообщение
                 message.Text = Encoding.UTF8.GetString(buffer);
 
-                NewMessageCame?.Invoke(message);
+                NewMessage?.Invoke(message);
             }
         }
 

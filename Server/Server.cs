@@ -19,9 +19,6 @@ namespace Server
         //основной слушающий сокет сервера
         private Socket _socket;
 
-        //основной слушающий сокет сервера
-        private Socket _socketRecieve;
-
         //токен для отмены таски слушания
         private CancellationTokenSource _cts;
 
