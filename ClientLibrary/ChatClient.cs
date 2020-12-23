@@ -90,7 +90,9 @@ namespace ClientLibrary
 
         public void ConnectToServer(IConnection conn)
         {
-            IPEndPoint localIPEndPoint = new IPEndPoint(IPAddress.Parse(conn.IPadress), conn.Port);
+            int port = int.Parse(conn.Port);
+
+            IPEndPoint localIPEndPoint = new IPEndPoint(IPAddress.Parse(conn.IPadress),port);
             _cts = new CancellationTokenSource();
 
             if (_socket == null)
