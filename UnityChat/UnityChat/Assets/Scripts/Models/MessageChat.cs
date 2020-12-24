@@ -1,6 +1,5 @@
-﻿
-
-using System;
+﻿using System;
+using UnityEngine;
 
 namespace Assets.Scripts.Models
 {
@@ -17,5 +16,7 @@ namespace Assets.Scripts.Models
         public string Caption { get; set; }
         public string Text { get; set; }
         public string Time { get; }
+
+        public Color32 Color { get; set; }
     }
 }

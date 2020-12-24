@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using UnityEngine;
 
 namespace Assets.Scripts
 {
@@ -11,5 +7,7 @@ namespace Assets.Scripts
         string Caption { get; set; }
         string Text { get; set; }
         string Time { get; }
+
+        Color32 Color { get; }
     }
 }

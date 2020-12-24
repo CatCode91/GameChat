@@ -98,7 +98,18 @@ namespace ClientLibrary
             if (_socket == null)
             {
                 _socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                _socket.Connect(localIPEndPoint);
+               
+                try
+                {
+                    _socket.Connect(localIPEndPoint);
+                }
+
+                catch(Exception ex)
+                {
+                    _socket = null;
+                    throw ex;
+                }
+
                 _stream = new NetworkStream(_socket);
                 Task.Run(() => ReceiveMessage(_cts.Token));
             }

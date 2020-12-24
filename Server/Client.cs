@@ -73,7 +73,7 @@ namespace Server
                         break;
                     //приводим массив полученых байтов к человеческому виду :)
                     message.Text = Encoding.UTF8.GetString(bufferMessage);
-
+                    message.Login = Name;
                     //уведомляем подписчиков о новом сообщении от клиента
                     MessageRecived?.Invoke(this, message);
                 }
@@ -86,7 +86,7 @@ namespace Server
         }
         }
 
-        internal void SendMessage(Message message)
+        internal void SendMessageToClient(Message message)
         { 
                 if (_socket != null)
                 {

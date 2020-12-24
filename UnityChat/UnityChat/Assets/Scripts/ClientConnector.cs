@@ -10,7 +10,7 @@ namespace Assets.Scripts
 {
     public class ClientConnector : MonoBehaviour
     {
-        private ChatWorker _clientWorker = new ChatWorker();
+        private MainClient _clientWorker;
         private MenuAnimator _animator;
 
         private TMP_Text _ip;
@@ -18,6 +18,7 @@ namespace Assets.Scripts
 
         public void Start()
         {
+            _clientWorker = GetComponentInChildren<MainClient>();
             _animator = GetComponent<MenuAnimator>();
             _ip = GameObject.Find("input_ip").GetComponent<TMP_Text>();
             _port = GameObject.Find("input_port").GetComponent<TMP_Text>();

@@ -25,7 +25,6 @@ namespace Server
         //перечисление хранящее статус сервера, юзается в методах получения статуса сервера.
         private NetworkStatus _serverStatus = NetworkStatus.Offline;
 
-
         //если что-то интересное происходит в методах, уведомляет подписчиков
         public event Action<string> UsefulMessages;
 
@@ -140,19 +139,21 @@ namespace Server
         {
             ServerEventHappend($"Новое сообщение от {client.Name} размером {message.Size} байт.", MessageStatus.OK);
 
+
             //рассылаем сообщение другим челам
             foreach (Client cl in _clients.ToArray()) //приводим к массиву, если вдруг коллецкия будет изменена из другого потока, чтоб не было проблем :)
-               
+            {
                 if (client.Name != cl.Name)
                 {
-                    message.Login = cl.Name;
-                    client.SendMessage(message);
-                    return;
+                    cl.SendMessageToClient(message);
                 }
+            }
+                
         }
 
         private void ClientDisconnected(Client client)
         {
+            client.MessageRecived -= ClientMessageRecived;
             _clients.Remove(client);
             ServerEventHappend($"Пользователь {client.Name} отключился от сервера",MessageStatus.OK);
         }
