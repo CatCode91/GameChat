@@ -6,7 +6,7 @@ namespace ClientLibrary.Abstractions
 {
     public interface IConnection
     {
-         string IPadress { get;  }
-         string Port { get;  }
+         string IPadress { get; }
+         string Port { get; }
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MainMenu
   - Chat
+  - InputMessageField
   layers:
   - Default
   - TransparentFX
@@ -17,7 +18,7 @@ TagManager:
   - 
   - Chat
   - MainMenu
-  - 
+  - InputTextChat
   - 
   - 
   - 

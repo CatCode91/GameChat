@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+
+using System;
 
 namespace Assets.Scripts.Models
 {
-    public class MessageChat
+    public class MessageChat : IMessageChat
     {
-        public MessageChat(string caption, string text, string time)
+
+        private string _time;
+
+        public MessageChat()
         {
-            Caption = caption;
-            Text = text;
-            Time = time;
+            Time = DateTime.Now.ToShortTimeString();
         }
 
-        public string Caption { get; }
-        public string Text { get; }
-        public string Time { get;  }
-
+        public string Caption { get; set; }
+        public string Text { get; set; }
+        public string Time { get; }
     }
 }
