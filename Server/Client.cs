@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,7 +41,7 @@ namespace Server
             _stream = new NetworkStream(_socket);
             Name = socket.GetHashCode();
 
-            //запускаем таску приема, асинхронно чтоб не подвешивал сервер (если вдруг еще кто постучится, или вдруг захотим остановить сервер)
+            //запускаем таску приема, асинхронно чтоб не подвешивал UI сервера
             Task.Run(() => StartReceive());
         }
 
@@ -64,18 +63,20 @@ namespace Server
                     //запоминаем сколько весит сообщение
                     message.Size = BitConverter.ToInt16(bufferSize, 0);
 
-                    //объявляем буфер для сообщения
-                    byte[] bufferMessage = new byte[message.Size];
+                    //переопределяем буфер для сообщения
+                    bufferSize = new byte[message.Size];
                     //считываем поток в буфер с учетом размера
-                    int readMessage = _stream.Read(bufferMessage, 0, message.Size);
+                    int readMessage = _stream.Read(bufferSize, 0, message.Size);
                     //если посылка пуста - выходим
                     if (readBytes == 0)
                         break;
                     //приводим массив полученых байтов к человеческому виду :)
-                    message.Text = Encoding.UTF8.GetString(bufferMessage);
+                    message.Text = Encoding.UTF8.GetString(bufferSize);
                     message.Login = Name;
-                    //уведомляем подписчиков о новом сообщении от клиента
-                    MessageRecived?.Invoke(this, message);
+
+                    //уведомляем подписчиков о приеме нового сообщения от клиента
+       
+                    MessageRecived.Invoke(this, message);
                 }
                 catch (Exception ex) 
                 {
@@ -86,6 +87,10 @@ namespace Server
         }
         }
 
+        /// <summary>
+        /// посылает сообщение текущему клиенту (текущему экземпляру)
+        /// </summary>
+        /// <param name="message"></param>
         internal void SendMessageToClient(Message message)
         { 
                 if (_socket != null)

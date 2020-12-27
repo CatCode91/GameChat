@@ -6,13 +6,9 @@ namespace ClientLibrary.Abstractions
     public interface IClient
     {
         /// <summary>
-        /// Возникает, когда меняется состояние сервера
-        /// </summary>
-        event Action<ServerStatus> ServerStatusChanged;
-        /// <summary>
         /// Возникает, когда приходит новое сообщение
         /// </summary>
-        event Action<IMessage> NewMessageCame;
+        event Action<IMessage> NewMessage;
 
        /// <summary>
        /// Подключиться к серверу

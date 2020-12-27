@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ClientLibrary
 {
-    public class ChatClient
+    public class ChatClient : IClient
     {
         //сокет клиента
         private Socket _socket;
@@ -49,7 +49,8 @@ namespace ClientLibrary
 
         public void ReceiveMessage(CancellationToken ct)
         {
-            IMessage message = new Message();
+            Message message = new Message();
+
             while (true)
             {
                 //буфер для размера сообщения
@@ -84,6 +85,7 @@ namespace ClientLibrary
                 //запоминаем сколько весит сообщение
                 message.Text = Encoding.UTF8.GetString(buffer);
 
+                //сообщаем подписчикам, что что-то пришло! :)
                 NewMessage?.Invoke(message);
             }
         }
@@ -111,9 +113,9 @@ namespace ClientLibrary
                 }
 
                 _stream = new NetworkStream(_socket);
+
                 Task.Run(() => ReceiveMessage(_cts.Token));
             }
         }
-
     }
 }

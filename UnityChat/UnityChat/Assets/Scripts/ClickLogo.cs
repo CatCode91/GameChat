@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
+/// <summary>
+/// Скрипт анимашки по клику на логотип
+/// </summary>
 public class ClickLogo : MonoBehaviour, IPointerClickHandler
 {
     private Animation _animation;

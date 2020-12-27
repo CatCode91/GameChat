@@ -80,7 +80,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ClientLibrary\ClientLibrary.csproj">
+    <ProjectReference Include="..\ClientLibrary\ClientLibrary.csproj">
       <Project>{b2b998e4-f6f4-4f69-bc00-fcfeca8859b1}</Project>
       <Name>ClientLibrary</Name>
     </ProjectReference>

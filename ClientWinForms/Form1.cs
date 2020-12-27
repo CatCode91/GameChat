@@ -31,7 +31,7 @@ namespace ClientWinForms
         {
             try
             {
-                _chat.ConnectToServer(new Connection("127.0.0.1", "8050"));
+                _chat.ConnectToServer(new Connection("192.168.1.119", "8050"));
             }
 
             catch (Exception ex) 

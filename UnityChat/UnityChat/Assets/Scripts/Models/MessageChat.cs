@@ -5,9 +5,6 @@ namespace Assets.Scripts.Models
 {
     public class MessageChat : IMessageChat
     {
-
-        private string _time;
-
         public MessageChat()
         {
             Time = DateTime.Now.ToShortTimeString();

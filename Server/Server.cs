@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -139,7 +138,6 @@ namespace Server
         {
             ServerEventHappend($"Новое сообщение от {client.Name} размером {message.Size} байт.", MessageStatus.OK);
 
-
             //рассылаем сообщение другим челам
             foreach (Client cl in _clients.ToArray()) //приводим к массиву, если вдруг коллецкия будет изменена из другого потока, чтоб не было проблем :)
             {
@@ -162,8 +160,7 @@ namespace Server
         private void ServerEventHappend(string text,MessageStatus status) 
         {
             LogManager.AddLog(text, MessageStatus.OK);
-            UsefulMessages?.Invoke(text);
+            Console.WriteLine(text);
         }
-
     }
 }

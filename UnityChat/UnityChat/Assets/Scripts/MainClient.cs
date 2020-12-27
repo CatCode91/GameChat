@@ -1,20 +1,18 @@
 ﻿using Assets.Scripts.Models;
 using ClientLibrary;
 using ClientLibrary.Abstractions;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 namespace Assets.Scripts
 {
     public class MainClient : MonoBehaviour
     {
-        private bool _trigger = false;
-        private IMessage _trigMess;
+       //тригер, для отрисовки префаба в методе Update, т.к не иснасит из подписанного метода (вызов не из главного потока)
+        private bool _isNewMessageCame = false;
+        private IMessage _newMessage;
 
         private ChatClient _client;
         private TMP_Text _sendingText;
@@ -22,6 +20,7 @@ namespace Assets.Scripts
         private GameObject _messageTemp;
         private MessageItem _message;
         private ScrollRect _scrollView;
+        private AudioSource _audioListener;
 
         private void Start()
         {
@@ -31,26 +30,28 @@ namespace Assets.Scripts
             _sendingText = GameObject.FindGameObjectWithTag("InputMessageField").GetComponent<TMP_Text>();
             _scrollView = _chatMainWindow.GetComponentInParent<ScrollRect>();
             _messageTemp = (GameObject)Resources.Load("MessageItem");
+            _audioListener = GetComponent<AudioSource>();
+            
         }
 
         private void Update()
         {
-            if (_trigger) 
+            if (_isNewMessageCame) 
             {
                 MessageChat msg = new MessageChat();
-                msg.Caption = $"Сообщение от: {_trigMess.Login}";
-                msg.Text = _trigMess.Text;
+                msg.Caption = $"Сообщение от: {_newMessage.Login}";
+                msg.Text = _newMessage.Text;
                 msg.Color = new Color32(213, 236, 255, 253);
                 PlaceMessageInChat(msg);
-                _trigger = false;
+                _isNewMessageCame = false;
+                _audioListener.Play();
             }
         }
 
         private void _client_NewMessage(IMessage obj)
         {
-            
-            _trigMess = obj;
-            _trigger = true;
+            _newMessage = obj;
+            _isNewMessageCame = true;
         }
 
         public void Disconnect()
@@ -69,7 +70,7 @@ namespace Assets.Scripts
           
             _client.SendMessage(_sendingText.text);
 
-            _sendingText.text = "";
+            _sendingText.SetText("");
 
         }
 
@@ -90,7 +91,7 @@ namespace Assets.Scripts
             _scrollView.StartCoroutine(ForceScrollDown());
         }
 
-        //карутина, чтоб всегда при новом сообщении опускаться в конец списка сообщениий
+        //карутина, чтоб всегда при новом сообщении в чате опускаться в конец списка сообщениий
         private IEnumerator ForceScrollDown()
         {
             // Wait for end of frame AND force update all canvases before setting to bottom.

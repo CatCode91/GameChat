@@ -15,17 +15,6 @@ namespace UnitTests
         {
             Connection conn = new Connection("127.0.0.1", "8050");
             Assert.IsNotNull(conn);
-        }
-
-
-        [TestMethod]
-        public void CheckConnection()
-        {
-            ChatClient client = new ChatClient();
-            Connection conn = new Connection("127.0.0.1", "8050");
-            client.ConnectToServer(conn);
-        }
-        
+        }      
     }
-
 }

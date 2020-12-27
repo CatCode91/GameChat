@@ -1,9 +1,11 @@
 ﻿using Assets.Scripts;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Для префаба MessageItem
+/// </summary>
 public class MessageItem : MonoBehaviour
 {
     private Text _caption;
@@ -27,6 +29,4 @@ public class MessageItem : MonoBehaviour
         _time.text = message.Time;
         _background.color = message.Color;
     }
-
-  
 }
