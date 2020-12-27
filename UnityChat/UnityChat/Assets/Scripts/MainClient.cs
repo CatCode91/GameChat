@@ -6,6 +6,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+//для работы с чатом
+
 namespace Assets.Scripts
 {
     public class MainClient : MonoBehaviour
@@ -48,6 +50,7 @@ namespace Assets.Scripts
             }
         }
 
+        //если пришло новое сообщение (подписка на событие либы)
         private void _client_NewMessage(IMessage obj)
         {
             _newMessage = obj;
@@ -59,6 +62,7 @@ namespace Assets.Scripts
             _client.Disconnect();
         }
 
+        //отсылает сообщение
         public void SendChatMessage()
         {
             //создаем модельку сообщения, чтоб поместить ее в MessageItem

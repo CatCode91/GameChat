@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+//синглтон для анимации меню
+//хотелось сделать вместо анимации движение камеры, но что-то не получалось в 2D
 public class MenuAnimator : MonoBehaviour
 {
     public static MenuAnimator instance = null;

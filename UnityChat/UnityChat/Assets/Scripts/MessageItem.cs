@@ -3,9 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-/// <summary>
-/// Для префаба MessageItem
-/// </summary>
+//скрипт для префаба MessageItem, подсовывать в поля значения
 public class MessageItem : MonoBehaviour
 {
     private Text _caption;

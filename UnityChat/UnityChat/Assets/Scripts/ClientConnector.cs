@@ -1,10 +1,9 @@
-﻿using ClientLibrary;
-using ClientLibrary.Abstractions;
-using ClientLibrary.Enums;
-using ClientLibrary.Model;
+﻿using ClientLibrary.Model;
 using System;
 using TMPro;
 using UnityEngine;
+
+//скрипт, содержащий логику для формы регистрации и подключения к серверу
 
 namespace Assets.Scripts
 {
